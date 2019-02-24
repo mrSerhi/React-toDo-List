@@ -45,6 +45,20 @@ class App extends Component {
     });
   };
 
+  handleItemAdd = () => {
+    const item = {
+      id: Date.now() + Math.random(),
+      value: `I'm the new item`,
+      done: false,
+      important: false
+    };
+
+    this.setState(({ items }) => {
+      const shallCopy = [...items, item];
+      return { items: shallCopy };
+    });
+  };
+
   render() {
     const { items } = this.state;
     return (
@@ -59,6 +73,12 @@ class App extends Component {
 
           <TodoList items={items} onItemDelete={this.handleItemDelete} />
           <ToDoForm />
+          <button
+            onClick={this.handleItemAdd}
+            className="btn btn-primary btn-block w-25 mt-3 mx-auto"
+          >
+            Add
+          </button>
         </div>
       </section>
     );
