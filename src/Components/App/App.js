@@ -36,6 +36,15 @@ class App extends Component {
     ]
   };
 
+  handleItemDelete = id => {
+    this.setState(({ items }) => {
+      const itemsShallCopy = [...items];
+      const sortedItems = itemsShallCopy.filter(item => item.id !== id);
+
+      return { items: sortedItems };
+    });
+  };
+
   render() {
     const { items } = this.state;
     return (
@@ -48,7 +57,7 @@ class App extends Component {
             <SortBlock />
           </div>
 
-          <TodoList items={items} />
+          <TodoList items={items} onItemDelete={this.handleItemDelete} />
           <ToDoForm />
         </div>
       </section>

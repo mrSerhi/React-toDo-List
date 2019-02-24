@@ -2,11 +2,12 @@ import React from "react";
 import ToDoListItem from "./ToDoItem";
 import PropTypes from "prop-types";
 
-const TodoList = ({ items }) => {
+const TodoList = ({ items, onItemDelete }) => {
   const listItems = items.map(item => {
+    const { id, ...data } = item;
     return (
-      <li key={item.id} className="list-group-item list-group-item-light">
-        <ToDoListItem {...item} />
+      <li key={id} className="list-group-item list-group-item-light">
+        <ToDoListItem {...data} onDelete={() => onItemDelete(id)} />
       </li>
     );
   });

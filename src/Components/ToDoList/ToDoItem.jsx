@@ -26,7 +26,7 @@ class ToDoListItem extends Component {
   };
 
   render() {
-    const { value } = this.props;
+    const { value, onDelete } = this.props;
     const { done: isDone, important: Isimportant } = this.state;
     const importantClassNames = Isimportant
       ? "todo-item important"
@@ -44,7 +44,7 @@ class ToDoListItem extends Component {
         </span>
 
         <div className="block">
-          <button className="btn btn-outline-danger mr-1">
+          <button onClick={onDelete} className="btn btn-outline-danger mr-1">
             <FontAwesomeIcon icon={faTrash} />
           </button>
           <button
