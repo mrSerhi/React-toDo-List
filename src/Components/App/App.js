@@ -13,7 +13,31 @@ import ToDoForm from "../ToDoForm/ToDoForm";
 // library.add(faIgloo)
 
 class App extends Component {
+  state = {
+    items: [
+      {
+        id: "22l3l2",
+        value: "create react app",
+        done: false,
+        important: false
+      },
+      {
+        id: "22vvvx3l2",
+        value: "clean my room",
+        done: false,
+        important: false
+      },
+      {
+        id: "dfgfgt44",
+        value: "read the newspeaper",
+        done: false,
+        important: false
+      }
+    ]
+  };
+
   render() {
+    const { items } = this.state;
     return (
       <section className="todo-app">
         <div className="container">
@@ -24,7 +48,7 @@ class App extends Component {
             <SortBlock />
           </div>
 
-          <TodoList />
+          <TodoList items={items} />
           <ToDoForm />
         </div>
       </section>

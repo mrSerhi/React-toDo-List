@@ -1,9 +1,19 @@
-.done {
+.todo-item {
+  font-size: 1.2rem;
+  letter-spacing: 1.2;
+  color: #050505;
+}
+
+.todo-item:hover {
+  cursor: pointer;
+}
+
+.done > .todo-item {
   text-decoration: line-through #111;
   color: #cac9c9;
 }
 
-.important {
+.todo-item.important {
   font-weight: 700;
   text-transform: uppercase;
   color: #93c928;

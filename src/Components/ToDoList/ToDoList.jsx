@@ -1,50 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 import ToDoListItem from "./ToDoItem";
+import PropTypes from "prop-types";
 
-class TodoList extends Component {
-  state = {
-    items: [
-      {
-        id: "22l3l2",
-        value: "create react app",
-        done: false,
-        important: false
-      },
-      {
-        id: "22vvvx3l2",
-        value: "clean my room",
-        done: false,
-        important: false
-      },
-      {
-        id: "dfgfgt44",
-        value: "read the newspeaper",
-        done: false,
-        important: false
-      }
-    ]
-  };
-  render() {
-    const { items } = this.state;
-
+const TodoList = ({ items }) => {
+  const listItems = items.map(item => {
     return (
-      <React.Fragment>
-        <div className="row my-3">
-          <div className="col-6 m-auto">
-            <ul className="list-group">
-              {items.map(item => {
-                return (
-                  <li className="list-group-item list-group-item-light text-dark">
-                    <ToDoListItem key={item.id} item={item} />
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-      </React.Fragment>
+      <li key={item.id} className="list-group-item list-group-item-light">
+        <ToDoListItem {...item} />
+      </li>
     );
-  }
-}
+  });
+
+  return (
+    <div className="row my-3">
+      <div className="col-6 m-auto">
+        <ul className="list-group">{listItems}</ul>
+      </div>
+    </div>
+  );
+};
+
+TodoList.propTypes = {
+  items: PropTypes.array.isRequired
+};
 
 export default TodoList;
