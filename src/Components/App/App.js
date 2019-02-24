@@ -59,6 +59,12 @@ class App extends Component {
     });
   };
 
+  handleToggleDone = id => {
+    console.log(id);
+  };
+
+  handleToggleImportant = id => {};
+
   render() {
     const { items } = this.state;
     return (
@@ -71,7 +77,12 @@ class App extends Component {
             <SortBlock />
           </div>
 
-          <TodoList items={items} onItemDelete={this.handleItemDelete} />
+          <TodoList
+            items={items}
+            onItemDelete={this.handleItemDelete}
+            onToggleDone={this.handleToggleDone}
+            onToggleImportant={this.handleToggleImportant}
+          />
           <ToDoForm />
           <button
             onClick={this.handleItemAdd}
