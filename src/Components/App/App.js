@@ -34,7 +34,8 @@ class App extends Component {
         important: false
       }
     ],
-    query: ""
+    query: "",
+    sortFilter: ""
   };
 
   handleInputSearch = query => {
@@ -91,11 +92,25 @@ class App extends Component {
     });
   };
 
+  handleGetingSortFilter = filter => {
+    this.setState({ sortFilter: filter });
+  };
+
+  sortingItems = filter => {
+    const foundItems = this.state.items.filter(item =>
+      item.value.includes(this.state.query)
+    );
+    if (filter === "active") return foundItems.filter(item => !item.done);
+    if (filter === "done") return foundItems.filter(item => item.done);
+
+    return foundItems;
+  };
+
   render() {
     const { items, query } = this.state;
     const itemsDoneLength = items.filter(item => item.done).length;
     const itemsLength = items.length - itemsDoneLength;
-    const filteredItems = items.filter(item => item.value.includes(query));
+    const sortedItems = this.sortingItems(this.state.sortFilter);
 
     return (
       <section className="todo-app">
@@ -104,11 +119,11 @@ class App extends Component {
 
           <div className="row justify-content-center">
             <Search query={query} onSearch={this.handleInputSearch} />
-            <SortBlock />
+            <SortBlock onFilter={this.handleGetingSortFilter} />
           </div>
 
           <TodoList
-            items={filteredItems}
+            items={sortedItems}
             onItemDelete={this.handleItemDelete}
             onToggleDone={this.handleToggleDone}
             onToggleImportant={this.handleToggleImportant}
