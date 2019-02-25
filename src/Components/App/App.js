@@ -33,7 +33,12 @@ class App extends Component {
         done: false,
         important: false
       }
-    ]
+    ],
+    query: ""
+  };
+
+  handleInputSearch = query => {
+    this.setState({ query });
   };
 
   handleItemDelete = id => {
@@ -87,9 +92,10 @@ class App extends Component {
   };
 
   render() {
-    const { items } = this.state;
+    const { items, query } = this.state;
     const itemsDoneLength = items.filter(item => item.done).length;
     const itemsLength = items.length - itemsDoneLength;
+    const filteredItems = items.filter(item => item.value.includes(query));
 
     return (
       <section className="todo-app">
@@ -97,12 +103,12 @@ class App extends Component {
           <HeaderBlock allToDo={itemsLength} doneToDo={itemsDoneLength} />
 
           <div className="row justify-content-center">
-            <Search />
+            <Search query={query} onSearch={this.handleInputSearch} />
             <SortBlock />
           </div>
 
           <TodoList
-            items={items}
+            items={filteredItems}
             onItemDelete={this.handleItemDelete}
             onToggleDone={this.handleToggleDone}
             onToggleImportant={this.handleToggleImportant}
