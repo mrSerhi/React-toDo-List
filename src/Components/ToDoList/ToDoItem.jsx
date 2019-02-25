@@ -1,5 +1,6 @@
 import React from "react";
 import "./todo-list.css";
+import PropTypes from "prop-types";
 
 //Font-awesome v5
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -38,6 +39,12 @@ const ToDoListItem = ({
       </div>
     </div>
   );
+};
+
+ToDoListItem.propTypes = {
+  value: PropTypes.string.isRequired,
+  done: PropTypes.bool.isRequired,
+  important: PropTypes.bool.isRequired
 };
 
 export default ToDoListItem;

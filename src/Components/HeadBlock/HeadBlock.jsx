@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const HeaderBlock = () => {
-  const allItems = <span className="badge badge-info p-2">3</span>;
-  const doneItems = <span className="badge badge-success p-2">0</span>;
+const HeaderBlock = ({ allToDo, doneToDo }) => {
+  const allItems = <span className="badge badge-info p-2">{allToDo}</span>;
+  const doneItems = <span className="badge badge-success p-2">{doneToDo}</span>;
 
   return (
     <div className="row py-3">
@@ -11,11 +12,16 @@ const HeaderBlock = () => {
       </div>
       <div className="col-4">
         <p>
-          You have {allItems} items, and {doneItems} Done.
+          You have {allItems} <b>Active</b> items, and {doneItems} <b>Done</b>.
         </p>
       </div>
     </div>
   );
+};
+
+HeaderBlock.propTypes = {
+  allToDo: PropTypes.number,
+  doneToDo: PropTypes.number
 };
 
 export default HeaderBlock;

@@ -59,18 +59,42 @@ class App extends Component {
     });
   };
 
-  handleToggleDone = id => {
-    console.log(id);
+  // id - current item id
+  // stateObj - current state obj which will be updated
+  // stateValue - current value of state object
+  updateToggledItems = (id, stateObj, stateValue) => {
+    const shallCopy = [...stateObj];
+    const index = shallCopy.findIndex(item => item.id === id);
+    shallCopy[index] = {
+      ...shallCopy[index],
+      [stateValue]: !shallCopy[index][stateValue]
+    };
+    return shallCopy;
   };
 
-  handleToggleImportant = id => {};
+  handleToggleDone = id => {
+    this.setState(({ items }) => {
+      const mutedStateObj = this.updateToggledItems(id, items, "done");
+      return { items: mutedStateObj };
+    });
+  };
+
+  handleToggleImportant = id => {
+    this.setState(({ items }) => {
+      const mutedStateObj = this.updateToggledItems(id, items, "important");
+      return { items: mutedStateObj };
+    });
+  };
 
   render() {
     const { items } = this.state;
+    const itemsDoneLength = items.filter(item => item.done).length;
+    const itemsLength = items.length - itemsDoneLength;
+
     return (
       <section className="todo-app">
         <div className="container">
-          <HeaderBlock />
+          <HeaderBlock allToDo={itemsLength} doneToDo={itemsDoneLength} />
 
           <div className="row justify-content-center">
             <Search />
