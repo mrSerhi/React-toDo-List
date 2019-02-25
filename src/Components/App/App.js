@@ -45,10 +45,10 @@ class App extends Component {
     });
   };
 
-  handleItemAdd = () => {
+  handleItemAdd = val => {
     const item = {
       id: Date.now() + Math.random(),
-      value: `I'm the new item`,
+      value: val,
       done: false,
       important: false
     };
@@ -107,13 +107,7 @@ class App extends Component {
             onToggleDone={this.handleToggleDone}
             onToggleImportant={this.handleToggleImportant}
           />
-          <ToDoForm />
-          <button
-            onClick={this.handleItemAdd}
-            className="btn btn-primary btn-block w-25 mt-3 mx-auto"
-          >
-            Add
-          </button>
+          <ToDoForm onSubmit={this.handleItemAdd} />
         </div>
       </section>
     );
