@@ -35,7 +35,7 @@ class App extends Component {
       }
     ],
     query: "",
-    sortFilter: ""
+    sortFilter: "all"
   };
 
   handleInputSearch = query => {
@@ -119,7 +119,10 @@ class App extends Component {
 
           <div className="row justify-content-center">
             <Search query={query} onSearch={this.handleInputSearch} />
-            <SortBlock onFilter={this.handleGetingSortFilter} />
+            <SortBlock
+              filter={sortFilter}
+              onFilter={this.handleGetingSortFilter}
+            />
           </div>
 
           <TodoList
