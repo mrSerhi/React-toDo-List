@@ -96,9 +96,9 @@ class App extends Component {
     this.setState({ sortFilter: filter });
   };
 
-  sortingItems = filter => {
-    const foundItems = this.state.items.filter(item =>
-      item.value.includes(this.state.query)
+  sortingItems = (items, filter) => {
+    const foundItems = items.filter(item =>
+      item.value.toLowerCase().includes(this.state.query.toLowerCase())
     );
     if (filter === "active") return foundItems.filter(item => !item.done);
     if (filter === "done") return foundItems.filter(item => item.done);
@@ -107,10 +107,10 @@ class App extends Component {
   };
 
   render() {
-    const { items, query } = this.state;
+    const { items, query, sortFilter } = this.state;
     const itemsDoneLength = items.filter(item => item.done).length;
     const itemsLength = items.length - itemsDoneLength;
-    const sortedItems = this.sortingItems(this.state.sortFilter);
+    const sortedItems = this.sortingItems(items, sortFilter);
 
     return (
       <section className="todo-app">
